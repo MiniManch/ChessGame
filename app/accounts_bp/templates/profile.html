@@ -1,0 +1,50 @@
+{% extends 'partials/accounts/base.html' %}
+{% block content %}
+
+
+<div class="row py-5 px-4" >
+  <div class="col-md-5  cl-sm-12 mx-auto">
+    <!-- Profile widget -->
+    <div class="bg-white shadow rounded overflow-hidden p-3" id='user-container'>
+      <div class="px-4 pt-0 pb-4 cover">
+        <div class="media align-items-end profile-head " >
+            {% if current_user.username == user.username %}
+            <a href="{{url_for('accounts_bp.edit_profile',user_id=user.id)}}" class="btn btn-outline-dark btn-sm btn-block mt-3 edit-button ">Edit profile</a>
+            {% endif %}
+
+          <div class="profile mr-3 d-flex justify-content-start">
+            <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{user.image}}" alt="..." width="130" class="rounded mb-2 mt-2 ">
+            <h3 class=" mb-0 mt-5 ms-3">{{user.username}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-3">
+        <h3 class="mb-0  ">ABOUT</h3>
+        <div class="p-5 mt-3" id='about'>
+          <p class="font-italic mb-0">{{current_user.about}}</p>
+        </div>
+      </div>
+      <div class="py-4 px-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h3 class="mb-0">GUIDES</h3>
+        </div>
+        <div class="row">
+            {% if user.guides|length == 0 and user.username == current_user.username %}
+            <a href="{{url_for('main_bp.newguide')}}" class='button-paper' style='width:fit-content;'> Create a Guide!</a>
+            {%endif%}
+        {% for guide in user.guides %}
+          <div class="col-lg-6 mb-2 pr-lg-1">
+            <a class='user-guide-link-container' href="{{url_for('main_bp.guide',guide_id=guide.id)}}">
+                <div class='g-fluid rounded shadow-sm user-guides-image' style='background-image: url("https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}") ;'>
+                    <h4>{{guide.subject}}</h4>
+                </div>
+            </a>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

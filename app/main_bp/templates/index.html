@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('main_bp.static',filename='main/style/game.css')}}">
+</head>
+<body>
+ <div class="container">
+  <h1 class="text-center title">Chess Board</h1>
+  <div class="chessboard">
+      {% for row in range(8) %}
+          {% for col in range(8) %}
+              {% set position = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][col] ~ (8 - row) %}
+              <div id="{{ position }}" class="square {% if (row + col) % 2 == 0 %}white-square{% else %}black-square{% endif %}">
+                  {% if col == 0 or col == 7%}
+                      <div class="number-label">{{8 - row}}</div>
+                  {% endif %}
+                  {% if row == 0 %}
+                      <div class="letter-label">{{ ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][col] }}</div>
+                      <img class="piece black {{ black_pieces[col] }}">
+                  {% elif row == 1 %}
+                      <img class="piece black {{ black_pawns[col] }}">
+                  {% elif row == 6 %}
+                      <img class="piece white {{ white_pawns[col] }}">
+                  {% elif row == 7 %}
+                      <div class="letter-label">{{ ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][col] }}</div>
+                      <img class="piece white {{ white_pieces[col] }}">
+                  {% endif %}
+              </div>
+          {% endfor %}
+      {% endfor %}
+  </div>
+
+  <div class="text-center mt-3">
+      <button id="switchButton" class="btn btn-primary">Switch Pieces</button>
+  </div>
+</div>
+
+    <script src="{{url_for('main_bp.static',filename='main/scripts/game.js')}}"></script>
+</body>
+</html>

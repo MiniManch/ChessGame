@@ -1,0 +1,601 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&family=Wix+Madefor+Display:wght@600&display=swap');
+
+body,html{
+    z-index:1;
+    background-color:#f5f5ef;
+    overflow-x: hidden;
+    overflow-x: visible;
+    margin: 0;
+}
+
+
+.alert{
+    width:100%;
+    left:0;
+    position:absolute;
+    top:15vh;
+    display: inline;
+    z-index: 5 !important;
+}
+
+.alert>button{
+    z-index: 6;
+}
+
+.alert.message{
+    position: absolute !important;
+    top:0;
+}
+
+.form{
+width : 50vw;
+margin:auto;
+}
+
+
+#post_container{
+    margin:auto;
+    width:85vw;
+}
+
+#post_page{
+    margin:auto;
+    width:85vw;
+    height:80vh;
+}
+.btn-block{
+    width:100%;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #b9ffec
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+
+
+.username_nav{
+    padding-right:1vw;
+}
+
+footer.disabled,input.disabled,select.disabled,div.disabled,ul.disabled,.sidebar-drop-toggler.disabled{
+  display: none !important;
+  visibility: hidden;
+  width:0;
+}
+
+
+/* Style for homepage video */
+
+#myVideo {
+  position: absolute;
+  width: 100%;
+  height:100%;
+  display: ;
+  height:fit-content;
+}
+
+#myVideoForPhone{
+    margin-right: 10vw;
+    width:100%;
+    display: ;
+}
+
+.small-screen{
+    display: none;
+}
+.homepage{
+    font-family: 'Assistant', sans-serif;
+}
+
+.homepage-jumbo{
+    position:relative;
+    left:25vw;
+    top:5vh;
+    z-index: 3;
+    padding-right: 0;
+    padding-left: 0;
+    color:white;
+    width:fit-content;
+    align-content: center;
+}
+
+.homepage-jumbo>h2{
+    font-size: 6rem;
+    line-height: 85%;
+    width:fit-content;
+
+}
+.homepage-jumbo>h2>span{
+    font-size: 5rem;
+    margin-left: 7vw;
+
+}
+
+.homepage-jumbo>h4{
+    width:fit-content;
+    margin-left: 22vw;
+    
+}
+
+#homepage-logo{
+    height:35vh;
+    width:20vw;
+    margin-left: auto;
+}
+
+#homepage-guides{
+    position: relative;
+    top:65vh;
+    height:fit-content;
+    width:98vw;
+}
+
+nav{
+  width:100vw;
+}
+
+#sidebar-container{
+    position: fixed;
+    top:0;
+    left:0;
+    height:100vh;
+    transition: width 2s;
+    z-index: 4;
+}
+
+.user_image{
+  padding:0 !important;
+  margin-left: 2vw;
+}
+
+
+#sidebar{
+    height:100%;
+    width: 15vw;
+    background-color: black;
+    display: block;
+    opacity: 1;
+    transition: opacity 200ms, display 200ms;
+}
+
+#sidebar.disabled{
+      display: none;
+      opacity: 0;
+}
+
+.alert{
+    width:100%;
+    left:0;
+    position:absolute;
+    top:10vh;
+}
+
+.sidebar-drop-toggler{
+    cursor: pointer;
+    z-index: 5;
+}
+
+
+.sidebar-drop-toggler:first-child{
+    margin-top: 7vh !important;
+    margin-left: 3vw;
+    z-index: 5;
+    color:white;
+}
+
+.changed-navbar-toggler{
+    color:black !important;
+}
+
+
+/*FOOTER*/
+
+footer{
+    /* position: relative; */
+    bottom: -20vh;
+    margin-top: 20vh;
+    font-family: 'Wix Madefor Display', sans-serif !important;
+    height:fit-content;
+    color:white;
+}
+
+.footer-group{
+    margin-left:5vw;
+    color:white;
+}
+/*Guide page */
+
+
+
+.button-paper {
+  align-self: center;
+  background-color: transparent;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-paper:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button-paper:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+.tools-dropdown{
+  background-color: transparent;
+}
+
+/*Ratings*/
+
+.ratings{
+    margin-right:10px;
+    margin-top:7vh;
+}
+
+.ratings i{
+    color:#cecece;
+    font-size:32px;
+}
+
+
+.rating-color{
+    color:#fbc634 !important;
+}
+
+.review-count{
+    font-weight:400;
+    margin-bottom:2px;
+    font-size:24px !important;
+}
+
+.small-ratings i{
+  color:#cecece;   
+}
+
+.review-stat{
+    font-weight:300;
+    font-size:18px;
+    margin-bottom:2px;
+}
+
+
+.ratings-container{
+    margin:0;
+    margin-left:5vw;
+    width:fit-content;
+
+}
+
+
+/*Guide Cards*/
+.card {
+  border: none;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 450px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 768px) {
+  .card {
+    min-height: 350px;
+  }
+}
+@media (max-width: 420px) {
+  .card {
+    min-height: 300px;
+  }
+}
+.card.card-has-bg {
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.card.card-has-bg:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: inherit;
+  -webkit-filter: grayscale(1);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.card.card-has-bg:hover {
+  transform: scale(0.98);
+  box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.3);
+  background-size: 130%;
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card.card-has-bg:hover .card-img-overlay {
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  background: #234f6d;
+  background: linear-gradient(0deg, rgba(4, 69, 114, 0.5) 0%, #044572 100%);
+}
+.card .card-footer {
+  background: none;
+  border-top: none;
+}
+.card .card-footer .media img {
+  border: solid 3px rgba(255, 255, 255, 0.3);
+}
+.card .card-meta {
+  color: #26BD75;
+}
+.card .card-body {
+  transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card:hover {
+  cursor: pointer;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card:hover .card-body {
+  margin-top: 30px;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.card .card-img-overlay {
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  background: #234f6d;
+  background: linear-gradient(0deg, rgba(35, 79, 109, 0.3785889356) 0%, #455f71 100%);
+}
+
+h1{
+  text-align:center;
+  margin-bottom:50px;
+  margin-top:50px;
+}
+
+
+#clear-search{
+  cursor: pointer;
+}
+.wrapper {
+  margin: 10vh;
+}
+
+.guide-container{
+    max-width:33%;
+}
+
+.homepage-guide-categories{
+    position:relative;
+    top:60vh;
+    left:22.5vw;
+    display:flex;
+    flex-wrap: wrap;
+    width:60vw;
+
+}
+
+#homepage-guides>h1{
+    font-size: 5rem;
+    font-family: 'Wix Madefor Display', sans-serif !important;
+}
+.card.homepage-guide-category{
+    width:15vw;
+    min-height: 30vh;
+    margin-left: 3vw;
+    margin-top: 5vh;
+    display: inline-block;
+}
+.homepage-category-text{
+    font-size: 1.5rem;
+    margin-left: 2vw;
+    font-family: 'Wix Madefor Display', sans-serif !important;
+
+}
+
+#categories-title{
+    font-size: 5rem;
+    margin-left: 25%;
+    font-family: 'Wix Madefor Display', sans-serif !important;
+
+}
+
+#homepage-store-jumbo{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('https://res.cloudinary.com/drzcke4vu/image/upload/v1685031926/Untitled_design_1_qnpsf8.jpg');
+    width: 60%;
+    height:60vh;
+    margin-top: 80vh;
+    margin-left: 22.5vw;
+    margin-bottom: 10vh;
+}
+
+#homepage-store-title{
+    margin-top: 20vh;
+    font-size: 5rem;
+    color:white;
+    font-family: 'Wix Madefor Display', sans-serif;
+
+}
+
+#homepage-store-title>a{
+    color:white;
+    text-decoration: none;
+}
+
+/*credits page*/
+.credits-container{
+    font-family: 'Wix Madefor Display', sans-serif;
+    background-color: purple;
+    height:50vh;
+    width:50vw;
+    margin-left:25vw;
+    margin-top: 10vh;
+}
+
+.credits-container>table{
+    position: relative;
+    bottom: -20vh
+}
+.credits-container>div{
+    margin-left: 6vw;
+    margin-right: 3vw;
+    padding-bottom: 2vh;
+    position: relative;
+    top:15vh;
+}
+
+#about{
+    position: initial;
+    padding-top: 5vh;
+    font-size: 2rem;
+}
+
+#about>small{
+    font-size: 0.8rem;
+}
+@media screen and (max-width:700px){
+    
+    .full-screen{
+        display: none;
+    }
+    .small-screen{
+        display:block;
+    }
+    .homepage-category-text.small-screen{
+        display: inline;
+        color:black !important;
+    }
+    .homepage-jumbo{
+         position:absolute;
+         left:2vw;
+         top:0;
+         z-index: 3;
+         padding-right: 0;
+         padding-left: 0;
+         color:white;
+         width:fit-content;
+         align-content: center;
+    }
+    .homepage-jumbo>h2>span{
+        padding-top: 5vh;
+    }
+
+    #homepage-logo{
+        height:35vh;
+        width:50vw;
+        margin-left: auto;
+    }
+    #sidebar{
+        height:100%;
+        width:35vw;
+        background-color: black;
+        display: block;
+        opacity: 1;
+        transition: opacity 200ms, display 200ms;
+    }
+
+    #homepage-guides{
+        top:5vh;
+    }
+    .guide-container{
+        max-width:100%;
+    }
+    .homepage-guide-categories{
+        top: 0;
+    }
+    #homepage-guides>h1{
+        font-size: 3.5rem;
+    }
+    #categories-title{
+        margin-left: 0vw;
+        margin-bottom: 0;
+        position: relative;
+        right:5vw;
+        font-size: 3.5rem;
+
+
+    }
+    .card.homepage-guide-category{
+        width:20vw;
+        min-height:13vh !important;
+        margin-left: 7vw;
+    }
+
+    .homepage-category-text{
+        width:15vw;
+        margin-left: 0;
+        padding-left: 0;
+        font-size: 0.8rem;
+    }
+    .homepage-category-text-container{
+        padding-left: 0;
+    }
+    #homepage-store-jumbo{
+        margin: 0;
+        margin-top:10vh;
+        margin-left: 10vw;
+        height:35vh;
+        width: 80% !important;
+    }
+}
