@@ -188,8 +188,10 @@ function getOpponentColor(currentColor) {
   return currentColor === 'white' ? 'black' : 'white';
 }
 
-
-// Get piece by class,  understand its possible moves, check which ones are possible!
+function isSquareValid(square) {
+  const [row, col] = square;
+  return row >= 0 && row < 8 && col >= 0 && col < 8;
+}
 function calculateLegalMoves(piece, currentPosition, board) {
   const row = 8 - parseInt(currentPosition[1]);
   const col = currentPosition.charCodeAt(0) - 'a'.charCodeAt(0);
@@ -204,33 +206,39 @@ function calculateLegalMoves(piece, currentPosition, board) {
 
     // Move one step forward if the square is empty
     if (row + direction >= 0 && row + direction < 8 && board[row + direction][col].piece === null) {
-      legalMoves.push([row + direction, col]);
+      const toSquare = [row + direction, col];
+      if (!isPiecePinned(board, [row, col], toSquare)) {
+        legalMoves.push(toSquare);
+      }
     }
 
     // Move two steps forward if it's the pawn's initial move and the squares are empty
     if (row === initialRow && board[row + direction][col].piece === null && board[row + (2 * direction)][col].piece === null) {
-      legalMoves.push([row + (2 * direction), col]);
+      const toSquare = [row + (2 * direction), col];
+      if (!isPiecePinned(board, [row, col], toSquare)) {
+        legalMoves.push(toSquare);
+      }
     }
 
-    console.log(currentColor,opponentColor)
-        // Capture diagonally if there is an opponent's piece
+    // Capture diagonally if there is an opponent's piece
     if (col - 1 >= 0 && row + direction >= 0 && row + direction < 8) {
       const leftCapture = board[row + direction][col - 1];
-      console.log('left',leftCapture)
       if (leftCapture.piece !== null && leftCapture.color === opponentColor) {
-        legalMoves.push([row + direction, col - 1]);
+        const toSquare = [row + direction, col - 1];
+        if (!isPiecePinned(board, [row, col], toSquare)) {
+          legalMoves.push(toSquare);
+        }
       }
     }
     if (col + 1 < 8 && row + direction >= 0 && row + direction < 8) {
       const rightCapture = board[row + direction][col + 1];
-      console.log('right',rightCapture)
-
       if (rightCapture.piece !== null && rightCapture.color === opponentColor) {
-        console.log('heyo1')
-        legalMoves.push([row + direction, col + 1]);
+        const toSquare = [row + direction, col + 1];
+        if (!isPiecePinned(board, [row, col], toSquare)) {
+          legalMoves.push(toSquare);
+        }
       }
     }
-
   } else if (piece === 'knight') {
     // Knight moves
     const moves = [
@@ -248,7 +256,10 @@ function calculateLegalMoves(piece, currentPosition, board) {
       const newCol = col + move[1];
       if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
         if (board[newRow][newCol].piece === null || board[newRow][newCol].color === opponentColor) {
-          legalMoves.push([newRow, newCol]);
+          const toSquare = [newRow, newCol];
+          if (!isPiecePinned(board, [row, col], toSquare)) {
+            legalMoves.push(toSquare);
+          }
         }
       }
     }
@@ -265,11 +276,14 @@ function calculateLegalMoves(piece, currentPosition, board) {
       let newCol = col + direction[1];
       while (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
         const targetPiece = board[newRow][newCol].piece;
-        if (targetPiece === null) {
-          legalMoves.push([newRow, newCol]);
-        } else if (board[newRow][newCol].color === opponentColor) {
-          legalMoves.push([newRow, newCol]);
-          break; // Stop searching in this direction after capturing a piece
+        if (targetPiece === null || board[newRow][newCol].color === opponentColor) {
+          const toSquare = [newRow, newCol];
+          if (!isPiecePinned(board, [row, col], toSquare)) {
+            legalMoves.push(toSquare);
+          }
+          if (targetPiece !== null) {
+            break; // Stop searching in this direction after capturing a piece
+          }
         } else {
           break; // Stop searching in this direction if a piece of the same color is encountered
         }
@@ -290,11 +304,14 @@ function calculateLegalMoves(piece, currentPosition, board) {
       let newCol = col + direction[1];
       while (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
         const targetPiece = board[newRow][newCol].piece;
-        if (targetPiece === null) {
-          legalMoves.push([newRow, newCol]);
-        } else if (board[newRow][newCol].color === opponentColor) {
-          legalMoves.push([newRow, newCol]);
-          break; // Stop searching in this direction after capturing a piece
+        if (targetPiece === null || board[newRow][newCol].color === opponentColor) {
+          const toSquare = [newRow, newCol];
+          if (!isPiecePinned(board, [row, col], toSquare)) {
+            legalMoves.push(toSquare);
+          }
+          if (targetPiece !== null) {
+            break; // Stop searching in this direction after capturing a piece
+          }
         } else {
           break; // Stop searching in this direction if a piece of the same color is encountered
         }
@@ -319,11 +336,14 @@ function calculateLegalMoves(piece, currentPosition, board) {
       let newCol = col + direction[1];
       while (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
         const targetPiece = board[newRow][newCol].piece;
-        if (targetPiece === null) {
-          legalMoves.push([newRow, newCol]);
-        } else if (board[newRow][newCol].color === opponentColor) {
-          legalMoves.push([newRow, newCol]);
-          break; // Stop searching in this direction after capturing a piece
+        if (targetPiece === null || board[newRow][newCol].color === opponentColor) {
+          const toSquare = [newRow, newCol];
+          if (!isPiecePinned(board, [row, col], toSquare)) {
+            legalMoves.push(toSquare);
+          }
+          if (targetPiece !== null) {
+            break; // Stop searching in this direction after capturing a piece
+          }
         } else {
           break; // Stop searching in this direction if a piece of the same color is encountered
         }
@@ -347,8 +367,9 @@ function calculateLegalMoves(piece, currentPosition, board) {
       const newRow = row + move[0];
       const newCol = col + move[1];
       if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-        if (board[newRow][newCol].piece === null || board[newRow][newCol].color === opponentColor) {
-          legalMoves.push([newRow, newCol]);
+        const toSquare = [newRow, newCol];
+        if (!isPiecePinned(board, [row, col], toSquare)) {
+          legalMoves.push(toSquare);
         }
       }
     }
@@ -359,164 +380,73 @@ function calculateLegalMoves(piece, currentPosition, board) {
   return legalMoves;
 }
 
+function isPiecePinned(board, fromSquare, toSquare) {
+  // Check if the current piece is pinned along a line of attack
 
+  // Step 1: Determine the direction of the line between the fromSquare and toSquare
+  const dx = toSquare[0] - fromSquare[0];
+  const dy = toSquare[1] - fromSquare[1];
 
+  // Step 2: Determine the square of the piece being moved
+  let pieceSquare = fromSquare;
 
-// function calculateLegalMoves(piece, currentPosition, board) {
-//     console.log(currentPosition)
-//   let col = currentPosition.charAt(0).charCodeAt(0) - 97;
-//   let row = 8 - parseInt(currentPosition[1], 10);
-//   let legalMoves = [];
+  // Step 3: Iterate along the line from the pieceSquare towards the toSquare
+  while (true) {
+    // Move the pieceSquare along the line
+    pieceSquare = [pieceSquare[0] + dx, pieceSquare[1] + dy];
 
-//   if (isNaN(col) || col < 0 || col >= 8 || isNaN(row) || row < 0 || row >= 8) {
-//     console.log(col)
-//     console.log(row)
-//     console.log('Invalid position');
-//     return legalMoves;
-//   }
+    // Check if the pieceSquare is out of bounds
+    if (!isSquareValid(pieceSquare)) {
+      break;
+    }
 
-//   if (piece === 'pawn') {
-//     const direction = (currentColor === 'white') ? -1 : 1; // Determine the forward direction based on the color
-//     const initialRow = (currentColor === 'white') ? 6 : 1; // Determine the initial row for the pawn based on the color
+    // Get the div element representing the pieceSquare on the board
+    const squareDiv = board[pieceSquare[0]][pieceSquare[1]];
 
-//     // Move one step forward if the square is empty
-//     if (row + direction >= 0 && row + direction < 8 && board[row + direction][col].color === null) {
-//       legalMoves.push([row + direction, col]);
-//     }
+    // Check if there is a piece on the pieceSquare
+    if (squareDiv) {
+      // Check if the piece on the pieceSquare is of the same color as the piece being moved
+      if (squareDiv.classList.contains('piece-color')) {
+        break;  // The piece being moved is not pinned
+      }
 
-//     // Move two steps forward if it's the pawn's initial move and the squares are empty
-//     if (row === initialRow && board[row + direction][col].color === null && board[row + (2 * direction)][col].color === null) {
-//       legalMoves.push([row + (2 * direction), col]);
-//     }
+      // Check if the piece on the pieceSquare is a king
+      if (squareDiv.classList.contains('king')) {
+        return true;  // The piece being moved is pinned
+      }
 
-//     // Capture diagonally if there is an opponent's piece
-//     if (col - 1 >= 0 && board[row + direction][col - 1].color === getOpponentColor(currentColor)) {
-//       legalMoves.push([row + direction, col - 1]);
-//     }
-//     if (col + 1 < 8 && board[row + direction][col + 1].color === getOpponentColor(currentColor)) {
-//       legalMoves.push([row + direction, col + 1]);
-//     }
-//   } else if (piece === 'knight') {
-//     // Knight moves
-//     const moves = [
-//       [-2, -1],
-//       [-2, 1],
-//       [-1, -2],
-//       [-1, 2],
-//       [1, -2],
-//       [1, 2],
-//       [2, -1],
-//       [2, 1]
-//     ];
-//     for (const move of moves) {
-//       const newRow = row + move[0];
-//       const newCol = col + move[1];
-//       if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-//         if (board[newRow][newCol].color !== currentColor) {
-//           legalMoves.push([newRow, newCol]);
-//         }
-//       }
-//     }
-//   } else if (piece === 'bishop') {
-//     // Bishop moves
-//     const directions = [
-//       [1, 1],
-//       [1, -1],
-//       [-1, 1],
-//       [-1, -1]
-//     ];
-//     for (const direction of directions) {
-//       let newRow = row + direction[0];
-//       let newCol = col + direction[1];
-//       while (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-//         if (board[newRow][newCol].color === currentColor) {
-//           break;
-//         }
-//         legalMoves.push([newRow, newCol]);
-//         if (board[newRow][newCol].color !== null) {
-//           break;
-//         }
-//         newRow += direction[0];
-//         newCol += direction[1];
-//       }
-//     }
-//   } else if (piece === 'rook') {
-//     // Rook moves
-//     const directions = [
-//       [1, 0],
-//       [-1, 0],
-//       [0, 1],
-//       [0, -1]
-//     ];
-//     for (const direction of directions) {
-//       let newRow = row + direction[0];
-//       let newCol = col + direction[1];
-//       while (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-//         if (board[newRow][newCol].color === currentColor) {
-//           break;
-//         }
-//         legalMoves.push([newRow, newCol]);
-//         if (board[newRow][newCol].color !== null) {
-//           break;
-//         }
-//         newRow += direction[0];
-//         newCol += direction[1];
-//       }
-//     }
-//   } else if (piece === 'queen') {
-//     // Queen moves
-//     const directions = [
-//       [1, 0],
-//       [-1, 0],
-//       [0, 1],
-//       [0, -1],
-//       [1, 1],
-//       [1, -1],
-//       [-1, 1],
-//       [-1, -1]
-//     ];
-//     for (const direction of directions) {
-//       let newRow = row + direction[0];
-//       let newCol = col + direction[1];
-//       while (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-//         if (board[newRow][newCol].color === currentColor) {
-//           break;
-//         }
-//         legalMoves.push([newRow, newCol]);
-//         if (board[newRow][newCol].color !== null) {
-//           break;
-//         }
-//         newRow += direction[0];
-//         newCol += direction[1];
-//       }
-//     }
-//   } else if (piece === 'king') {
-//     // King moves
-//     const moves = [
-//       [-1, -1],
-//       [-1, 0],
-//       [-1, 1],
-//       [0, -1],
-//       [0, 1],
-//       [1, -1],
-//       [1, 0],
-//       [1, 1]
-//     ];
-//     for (const move of moves) {
-//       const newRow = row + move[0];
-//       const newCol = col + move[1];
-//       if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-//         if (board[newRow][newCol].color !== currentColor) {
-//           legalMoves.push([newRow, newCol]);
-//         }
-//       }
-//     }
-//   }
+      // Check if the piece on the pieceSquare is attacking along the line
+      if (
+        (dx === 0 || dy === 0) &&
+        (squareDiv.classList.contains('rook') || squareDiv.classList.contains('queen'))
+      ) {
+        return true;  // The piece being moved is pinned by a rook or queen
+      }
 
-//   legalMoves = legalMoves.map(move => String.fromCharCode(move[1] + 'a'.charCodeAt(0)) + (8 - move[0]));
-//   console.log('aftermove',board)
-//   return legalMoves;
-// }
+      if (
+        Math.abs(dx) === Math.abs(dy) &&
+        (squareDiv.classList.contains('bishop') || squareDiv.classList.contains('queen'))
+      ) {
+        return true;  // The piece being moved is pinned by a bishop or queen
+      }
+
+      // Check if the piece on the pieceSquare is a pawn and attacking diagonally towards the pieceSquare
+      if (
+        Math.abs(dx) === 1 &&
+        Math.abs(dy) === 1 &&
+        squareDiv.classList.contains('pawn') &&
+        squareDiv.classList.contains('piece-color') // Assuming pawns have a class indicating their color
+      ) {
+        return true;  // The piece being moved is pinned by a pawn
+      }
+
+      break;  // The piece being moved is not pinned
+    }
+  }
+
+  return false;  // The piece being moved is not pinned
+}
+
 
 
 // Checker of if pin, or if stalemate, or if checkmate
